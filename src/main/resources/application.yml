@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/police_support_platform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=CTT
+    username: root
+    password: root
+  security:
+    filter:
+      dispatcher-types: REQUEST,FORWARD,ASYNC
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false
+  common:
+    app:
+      idm-url: http://localhost:${server.port}/modeler/
+  idm:
+    app:
+      admin:
+        user-id: admin
+        password: test
+        first-name: admin
+        last-name: admin
+  rest:
+    app:
+      authentication-mode: verify-privilege
+  db-history-used: false
+  dmn:
+    history-enabled: false
+
+mybatis:
+  mapper-locations: classpath:/META-INF/modeler-mybatis-mappings/*.xml
+  config-location: classpath:/META-INF/mybatis-config.xml
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+server:
+  servlet:
+    context-path: /modeler
+  port: 9090
