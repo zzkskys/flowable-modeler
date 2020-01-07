@@ -57,6 +57,19 @@
       ]
     },
     {
+      "name": "categorypackage",
+      "properties": [
+        {
+          "id": "categorydefinition",
+          "type": "String",
+          "title": "分类",
+          "value": "",
+          "description": "分类",
+          "popular": true
+        }
+      ]
+    },
+    {
       "name": "process_authorpackage",
       "properties": [
         {
@@ -1823,7 +1836,8 @@
         "tasklistenerspackage",
         "skipexpressionpackage",
         "nodetypepackage",
-        "editdatapackage"
+        "editdatapackage",
+        "categorypackage"
       ],
       "hiddenPropertyPackages": [],
       "roles": [
