@@ -3,15 +3,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/police_support_platform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=CTT
     username: root
     password: root
-  security:
-    filter:
-      dispatcher-types: REQUEST,FORWARD,ASYNC
 flowable:
   #关闭定时任务JOB
   async-executor-activate: false
   common:
     app:
-      idm-url: http://localhost:${server.port}/modeler/
+      idm-url: test # 目前没什么作用,则伪造了一个 idm 访问的 url
   idm:
     app:
       admin:
@@ -19,9 +16,6 @@ flowable:
         password: test
         first-name: admin
         last-name: admin
-  rest:
-    app:
-      authentication-mode: verify-privilege
   db-history-used: false
   dmn:
     history-enabled: false
