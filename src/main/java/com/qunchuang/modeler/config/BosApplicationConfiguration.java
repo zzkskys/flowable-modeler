@@ -1,5 +1,7 @@
 package com.qunchuang.modeler.config;
 
+import org.flowable.ui.idm.conf.ApplicationConfiguration;
+import org.flowable.ui.idm.conf.SecurityConfiguration;
 import org.flowable.ui.idm.properties.FlowableIdmAppProperties;
 import org.flowable.ui.idm.servlet.ApiDispatcherServletConfiguration;
 import org.flowable.ui.modeler.properties.FlowableModelerAppProperties;
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 @Configuration
 @EnableConfigurationProperties({FlowableIdmAppProperties.class, FlowableModelerAppProperties.class})
 @ComponentScan(basePackages = {
-        "org.flowable.ui.idm.conf",
+//        "org.flowable.ui.idm.conf",
         "org.flowable.ui.idm.security",
         "org.flowable.ui.idm.service",
         "org.flowable.ui.modeler.repository",
@@ -26,9 +28,13 @@ import org.springframework.web.servlet.DispatcherServlet;
         "org.flowable.ui.common.service",
         "org.flowable.ui.common.repository",
         "org.flowable.ui.common.security",
-        "org.flowable.ui.common.tenant"}, excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = org.flowable.ui.idm.conf.ApplicationConfiguration.class)})
-public class ApplicationConfiguration {
+        "org.flowable.ui.common.tenant"
+}, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                value = {ApplicationConfiguration.class}
+        )
+})
+public class BosApplicationConfiguration {
 
 
     @Bean
