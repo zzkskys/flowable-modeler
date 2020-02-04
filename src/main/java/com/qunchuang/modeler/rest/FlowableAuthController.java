@@ -15,8 +15,8 @@
 // *
 // * @author zzk
 // */
-////@RestController
-////@RequestMapping("/app")
+//@RestController
+//@RequestMapping("/app")
 //public class FlowableAuthController {
 //
 //    private final ObjectMapper objectMapper;

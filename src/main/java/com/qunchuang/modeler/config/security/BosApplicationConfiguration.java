@@ -1,4 +1,4 @@
-package com.qunchuang.modeler.config;
+package com.qunchuang.modeler.config.security;
 
 import org.flowable.ui.idm.conf.ApplicationConfiguration;
 import org.flowable.ui.idm.conf.SecurityConfiguration;
@@ -19,7 +19,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 @Configuration
 @EnableConfigurationProperties({FlowableIdmAppProperties.class, FlowableModelerAppProperties.class})
 @ComponentScan(basePackages = {
-//        "org.flowable.ui.idm.conf",
         "org.flowable.ui.idm.security",
         "org.flowable.ui.idm.service",
         "org.flowable.ui.modeler.repository",

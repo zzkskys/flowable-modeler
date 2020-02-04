@@ -35,24 +35,19 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    private CorsConfiguration buildConfig() {
+    /**
+     * 跨域过滤器
+     */
+    @Bean
+    public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
 
-        return corsConfiguration;
-    }
-
-
-    /**
-     * 跨域过滤器
-     */
-    @Bean
-    public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", buildConfig()); // 4
+        source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }
 }

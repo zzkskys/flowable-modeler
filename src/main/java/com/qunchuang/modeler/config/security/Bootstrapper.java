@@ -1,9 +1,5 @@
-package com.qunchuang.modeler.config.test;
+package com.qunchuang.modeler.config.security;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.flowable.common.engine.api.FlowableException;
 import org.flowable.idm.api.IdmIdentityService;
@@ -21,16 +17,25 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 @Component
 public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(org.flowable.ui.idm.conf.Bootstrapper.class);
-    @Autowired
-    private IdmIdentityService identityService;
-    private FlowableLdapProperties ldapProperties;
-    @Autowired
-    private FlowableIdmAppProperties idmAppProperties;
 
-    public Bootstrapper() {
+    private final IdmIdentityService identityService;
+    private final FlowableLdapProperties ldapProperties;
+    private final FlowableIdmAppProperties idmAppProperties;
+
+    public Bootstrapper(IdmIdentityService identityService,
+                        FlowableIdmAppProperties idmAppProperties,
+                        @Autowired(required = false) FlowableLdapProperties ldapProperties) {
+        this.identityService = identityService;
+        this.idmAppProperties = idmAppProperties;
+        this.ldapProperties = ldapProperties;
     }
 
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -54,7 +59,7 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
     protected void createDefaultAdminUserAndPrivileges() {
         String adminUserId = this.idmAppProperties.getAdmin().getUserId();
         if (StringUtils.isNotEmpty(adminUserId)) {
-            User adminUser = (User)((UserQuery)this.identityService.createUserQuery().userId(adminUserId)).singleResult();
+            User adminUser = (User) ((UserQuery) this.identityService.createUserQuery().userId(adminUserId)).singleResult();
             if (adminUser == null) {
                 LOGGER.info("No admin user found, initializing default entities");
                 adminUser = this.initializeAdminUser();
@@ -87,12 +92,12 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
 
     protected void initializeDefaultPrivileges(String adminId) {
         List<Privilege> privileges = this.identityService.createPrivilegeQuery().list();
-        Map<String, Privilege> privilegeMap = new HashMap();
+        Map<String, Privilege> privilegeMap = new HashMap<>();
         Iterator var4 = privileges.iterator();
 
         Privilege adminAppPrivilege;
-        while(var4.hasNext()) {
-            adminAppPrivilege = (Privilege)var4.next();
+        while (var4.hasNext()) {
+            adminAppPrivilege = (Privilege) var4.next();
             privilegeMap.put(adminAppPrivilege.getName(), adminAppPrivilege);
         }
 
@@ -124,14 +129,14 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     protected Privilege findOrCreatePrivilege(String privilegeName, Map<String, Privilege> privilegeMap) {
-        Privilege privilege = null;
+        Privilege privilege;
         if (privilegeMap.containsKey(privilegeName)) {
-            privilege = (Privilege)privilegeMap.get(privilegeName);
+            privilege = privilegeMap.get(privilegeName);
         } else {
             try {
                 privilege = this.identityService.createPrivilege(privilegeName);
             } catch (Exception var5) {
-                privilege = (Privilege)this.identityService.createPrivilegeQuery().privilegeName(privilegeName).singleResult();
+                privilege = this.identityService.createPrivilegeQuery().privilegeName(privilegeName).singleResult();
             }
         }
 
@@ -146,10 +151,5 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
         return this.identityService.createPrivilegeQuery().userId(restAdminId).privilegeId(privilege.getId()).singleResult() != null;
     }
 
-    @Autowired(
-            required = false
-    )
-    public void setLdapProperties(FlowableLdapProperties ldapProperties) {
-        this.ldapProperties = ldapProperties;
-    }
+
 }

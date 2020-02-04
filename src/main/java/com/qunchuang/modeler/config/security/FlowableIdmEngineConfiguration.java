@@ -1,4 +1,4 @@
-package com.qunchuang.modeler.config.test;
+package com.qunchuang.modeler.config.security;
 
 import org.flowable.common.engine.impl.runtime.Clock;
 import org.flowable.idm.engine.IdmEngine;
@@ -14,9 +14,7 @@ public class FlowableIdmEngineConfiguration {
     public FlowableIdmEngineConfiguration() {
     }
 
-    @Bean(
-            name = {"clock"}
-    )
+    @Bean("clock")
     public Clock getClock(IdmEngine idmEngine) {
         return idmEngine.getIdmEngineConfiguration().getClock();
     }
