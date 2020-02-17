@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <flowable.version>6.4.2</flowable.version>
+        <flowable.version>6.5.0</flowable.version>
         <mybatis-spring-boot>1.3.1</mybatis-spring-boot>
     </properties>
 
