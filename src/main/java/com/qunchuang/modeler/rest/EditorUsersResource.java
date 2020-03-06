@@ -32,8 +32,12 @@ import java.util.List;
 @RequestMapping("/app")
 public class EditorUsersResource {
 
-    @Autowired
-    private IdmIdentityService idmIdentityService;
+    private final IdmIdentityService idmIdentityService;
+
+    public EditorUsersResource(IdmIdentityService idmIdentityService) {
+        this.idmIdentityService = idmIdentityService;
+    }
+
 
     /**
      * 查询指定的用户
