@@ -1654,9 +1654,6 @@
         "process_idpackage",
         "namepackage",
         "documentationpackage",
-        "process_authorpackage",
-        "process_versionpackage",
-        "process_namespacepackage",
         "process_historylevelpackage",
         "isexecutablepackage",
         "datapropertiespackage",
@@ -1664,11 +1661,16 @@
         "eventlistenerspackage",
         "signaldefinitionspackage",
         "messagedefinitionspackage",
+        "categorypackage"
+      ],
+      "hiddenPropertyPackages": [
+        "process_versionpackage",
+        "process_namespacepackage",
+        "process_authorpackage",
         "process_potentialstarteruserpackage",
         "process_potentialstartergrouppackage",
         "process_iseagerexecutionfetchpackage"
       ],
-      "hiddenPropertyPackages": [],
       "roles": []
     },
     {
