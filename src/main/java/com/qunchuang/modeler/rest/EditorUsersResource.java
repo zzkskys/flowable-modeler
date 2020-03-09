@@ -46,7 +46,7 @@ public class EditorUsersResource {
     public ResultListDataRepresentation getUsers(@RequestParam(value = "filter", required = false) String filter) {
         if (!StringUtils.isEmpty(filter)) {
             filter = filter.trim();
-            String sql = "select * from act_id_user where ID_ like #{id} or LAST_ like #{name} limit 10";
+            String sql = "select * from ACT_ID_USER where ID_ like #{id} or LAST_ like #{name} limit 10";
             filter = "%" + filter + "%";
             List<User> matchingUsers = idmIdentityService.createNativeUserQuery().sql(sql).parameter("id", filter).parameter("name", filter).list();
             List<UserRepresentation> userRepresentations = new ArrayList<>(matchingUsers.size());
@@ -66,7 +66,7 @@ public class EditorUsersResource {
     public ResultListDataRepresentation getGroups(@RequestParam(required = false, value = "filter") String filter) {
         if (!StringUtils.isEmpty(filter)) {
             filter = filter.trim();
-            String sql = "select * from act_id_group where NAME_ like #{name} limit 10";
+            String sql = "select * from ACT_ID_GROUP where NAME_ like #{name} limit 10";
             filter = "%" + filter + "%";
             List<Group> groups = idmIdentityService.createNativeGroupQuery().sql(sql).parameter("name", filter).list();
             List<GroupRepresentation> result = new ArrayList<>();
