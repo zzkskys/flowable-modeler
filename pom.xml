@@ -33,10 +33,15 @@
             <version>${flowable.version}</version>
         </dependency>
 
-        <!--mysql依赖-->
+<!--        &lt;!&ndash;mysql依赖&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
 
         <!-- Spring Boot Mybatis 依赖 -->
