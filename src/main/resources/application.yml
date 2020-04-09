@@ -1,7 +1,6 @@
 spring:
   datasource:
     url: jdbc:h2:file:./db/flowable-modeler
-    schema: classpath:sql/schema.sql
     initialization-mode: always # 暂时禁用JPA 通过脚本启动
   h2:
     console:
