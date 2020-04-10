@@ -233,11 +233,11 @@ FLOWABLE.APP_URL = {
     /* OTHER URLS */
 
     getEditorUsersUrl: function () {
-        return FLOWABLE.CONFIG.contextRoot + '/app/rest/editor-users';
+        return FLOWABLE.CONFIG.contextRoot + '/users/page';
     },
 
     getEditorGroupsUrl: function () {
-        return FLOWABLE.CONFIG.contextRoot + '/app/rest/editor-groups';
+        return FLOWABLE.CONFIG.contextRoot + '/groups';
     },
 
     getAboutInfoUrl: function () {
