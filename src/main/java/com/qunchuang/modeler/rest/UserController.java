@@ -2,10 +2,7 @@ package com.qunchuang.modeler.rest;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    @GetMapping("/{userId}")
+    public User getOne(@PathVariable String userId) {
+        return new User("张三");
+    }
 
     /**
      * 查询人员并分页
@@ -73,13 +75,7 @@ class User {
 
     private OrganUnit organUnit = new OrganUnit("0", "温州市局", LevelEnum.MUNICIPAL, "");
 
-    private String phone = "";
-
     private Role role = Role.LEADER;
-
-    //警号
-    private String policeSign = "000000";
-
 
     public User(String name) {
         this.name = name;
