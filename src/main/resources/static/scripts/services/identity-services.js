@@ -31,7 +31,7 @@ angular.module('flowableModeler').service('UserService', ['$http', '$q',
          * Filter users based on a filter text.
          */
         this.getFilteredUsers = function (filterText, taskId, processInstanceId) {
-            var params = {filter: filterText};
+            var params = {search: filterText};
             if(taskId) {
                 params.excludeTaskId = taskId;
             }
@@ -69,7 +69,7 @@ angular.module('flowableModeler').service('GroupService', ['$http', '$q',
         this.getFilteredGroups = function (filterText) {
             var params;
             if(filterText) {
-                params = {filter: filterText};
+                params = {search: filterText};
             }
 
             return httpAsPromise({

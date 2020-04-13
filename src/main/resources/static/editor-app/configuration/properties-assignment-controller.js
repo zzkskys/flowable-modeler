@@ -146,8 +146,18 @@ angular.module('flowableModeler').controller('FlowableAssignmentPopupCtrl',
             if ($scope.popup.filter !== null && $scope.popup.filter !== undefined) {
                 UserService.getFilteredUsers($scope.popup.filter).then(function (result) {
                     var filteredUsers = [];
-                    for (var i=0; i<result.data.length; i++) {
-                        var filteredUser = result.data[i];
+                    for (var i=0; i<result.content.length; i++) {
+                        // var filteredUser = result.content[i];
+                        var filteredUser = {
+                            id:result.content[i].id,
+                            firstName:result.content[i].name,
+                            lastName:result.content[i].organUnit.name,
+                            email:null,
+                            fullName:result.content[i].name+" "+result.content[i].organUnit.name,
+                            tenantId:null,
+                            groups:[],
+                            privileges:[]
+                        }
 
                         var foundCandidateUser = false;
                         if ($scope.popup.assignmentObject.idm.candidateUsers !== null && $scope.popup.assignmentObject.idm.candidateUsers !== undefined) {
@@ -161,6 +171,7 @@ angular.module('flowableModeler').controller('FlowableAssignmentPopupCtrl',
                         }
 
                         if (!foundCandidateUser) {
+                            // filteredUser.firstName = filteredUser.firstName+"aaa";
                             filteredUsers.push(filteredUser);
                         }
 
@@ -182,7 +193,7 @@ angular.module('flowableModeler').controller('FlowableAssignmentPopupCtrl',
             }
 
             GroupService.getFilteredGroups($scope.popup.groupFilter).then(function(result) {
-                $scope.popup.groupResults = result.data;
+                $scope.popup.groupResults = result;
                 $scope.resetGroupSelection();
             });
         }
